@@ -1,20 +1,32 @@
 
-starter.controller('HomeCtrl',['$scope',
-  function ($scope) {
+starter.controller('HomeCtrl',['$scope', "Auth", '$location',
+  function ($scope, Auth, $location) {
     console.log("YOU'RE IN");
-
-}]);
-
-starter.controller('LoginCtrl', ["$rootScope", "$scope", "Auth", '$location',function($rootScope, $scope, Auth, $location) {
-    $rootScope.auth = Auth;
+    $scope.auth = Auth;
 
     // any time auth status updates, add the user data to scope
-    $rootScope.auth.$onAuth(function(authData, path) {
-      $rootScope.authData = authData;
+    $scope.auth.$onAuth(function(authData, path) {
+      $scope.authData = authData;
+      $location.path(path);
       console.log(authData);
     });
 
-    $rootScope.accept = function(path) {
+    $scope.accept = function(path) {
+      $location.path(path);
+    };
+
+}]);
+
+starter.controller('LoginCtrl', ["$scope", "Auth", '$location',function($scope, Auth, $location) {
+    $scope.auth = Auth;
+
+    // any time auth status updates, add the user data to scope
+    $scope.auth.$onAuth(function(authData, path) {
+      $scope.authData = authData;
+      console.log(authData);
+    });
+
+    $scope.accept = function(path) {
       $location.path(path);
     };
   }
