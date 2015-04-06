@@ -1,0 +1,14 @@
+<!--div>
+  <div ng-show="authData">
+    <p>Hello, {{ authData.facebook.displayName }}</p>
+    <button ng-click="auth.$unauth()">Logout</button>
+  </div -->
+
+
+<div>
+ <p>Welcome, please log in.</p>
+ <button ng-click="auth.$authWithOAuthPopup('facebook')">Login With Facebook</button>
+</div>
+
+<div ng-if="authData">{{accept('/home')}}</div></div>
+<!--/div></div>
